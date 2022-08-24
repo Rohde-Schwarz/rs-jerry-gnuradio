@@ -1,0 +1,84 @@
+id: msr4_rs_jerry
+label: rs jerry
+category: '[Msr4]'
+templates:
+  imports: from gnuradio import msr4
+  make: msr4.rs_jerry(${ip_addr}, ${user}, ${password}, ${rx_channel}, ${port}, ${dest_addr},
+    ${protocol}, ${sat_frequency}, ${down_frequency}, ${bandwidth_analysis_bandwidth},
+    ${port_id}, ${norm})
+parameters:
+- id: ip_addr
+  label: IP Address
+  dtype: string
+- id: user
+  label: Username
+  dtype: string
+- id: password
+  label: Password
+  dtype: string
+
+- id: rx_channel
+  label: RX Channel
+  dtype: enum
+  options: [msr4.Rx1, msr4.Rx2, msr4.Rx3, msr4.Rx4]
+  option_labels: [Rx1, Rx2, Rx3, Rx4]
+
+- id: port
+  label: Port
+  dtype: int
+  default: 5001
+  category: Streaming Settings
+  hide: part
+- id: dest_addr
+  label: Destination Address
+  dtype: string
+  default: 127.0.0.1
+  category: Streaming Settings
+  hide: part
+- id: protocol
+  label: Protocol
+  dtype: enum
+  options: [msr4.HRZR, msr4.AMMOS]
+  option_labels: [HRZR, AMMOS]
+  category: Streaming Settings
+  hide: part
+
+- id: sat_frequency
+  label: Satellite frequency [Hz]
+  dtype: int
+  default: 1500000000
+  category: Channel Settings
+  hide: part
+- id: down_frequency
+  label: Downconverter frequency [Hz]
+  dtype: int
+  default: 0
+  category: Channel Settings
+  hide: part
+- id: bandwidth_analysis_bandwidth
+  label: Bandwidth by analysis bandwidth
+  dtype: int
+  default: 194100000
+  category: Channel Settings
+  hide: part
+
+- id: port_id
+  label: VF Port ID
+  dtype: int
+  default: 0
+  category: DPDK Settings
+  hide: part
+- id: norm
+  label: Norm
+  dtype: int
+  default: 1
+  category: DPDK Settings
+  hide: part
+
+outputs:
+- label: out
+  domain: stream
+  dtype: complex
+  multiplicity: 1
+
+file_format: 1
