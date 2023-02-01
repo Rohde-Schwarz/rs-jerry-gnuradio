@@ -32,7 +32,7 @@ sudo make install
 ## Examples
 A simple example displaying the recieved IQ samples in a QT GUI Time Sink can be found under `gr-msr4/examples`.
 
-## Sidnote: rs-jerry-setup loopback
-The generated IQ samples of the loopback of the rs-jerry-setup repo can be further processed or displayed in the `simple_jerry_example.grc` aswell.
+## Sidenote: rs-jerry-setup loopback
+The generated IQ samples of the loopback of the [rs-jerry-setup](https://github.com/Rohde-Schwarz/rs-jerry-setup) repo can be further processed or displayed in the `simple_jerry_example.grc` aswell.
 
 Simply select the **receiving** VF port id of the loopback in the `DPDK Settings` tab and start the TRex generator beforehand.
