@@ -25,6 +25,13 @@ add_library(gnuradio-msr4 SHARED ${msr4_sources})
 
 include_directories(/usr/local/include/iqClient/generated/)
 find_library(libjerryDriver libjerryDriver.a /usr/local/lib/)
+
+set(LOCAL_GRPC_PATH /usr)
+set(ENV{PKG_CONFIG_PATH} ${LOCAL_GRPC_PATH}/share/pkgconfig:${LOCAL_GRPC_PATH}/lib/pkgconfig:$ENV{PKG_CONFIG_PATH})
+set(CMAKE_INCLUDE_PATH ${LOCAL_GRPC_PATH}/include ${CMAKE_INCLUDE_PATH})
+set(CMAKE_LIBRARY_PATH ${LOCAL_GRPC_PATH}/lib ${CMAKE_LIBRARY_PATH})
+list(APPEND CMAKE_PREFIX_PATH ${LOCAL_GRPC_PATH})
+
 find_package(Protobuf REQUIRED)
 find_package(gRPC CONFIG REQUIRED)
 find_package(PkgConfig REQUIRED)
