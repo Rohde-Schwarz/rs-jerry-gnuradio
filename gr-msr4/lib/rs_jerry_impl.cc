@@ -7,6 +7,7 @@
 
 #include "rs_jerry_impl.h"
 #include <gnuradio/io_signature.h>
+#include <iqClient/dpdkSource/dpdkSource.h>
 
 namespace gr {
 namespace msr4 {
@@ -68,7 +69,9 @@ rs_jerry_impl::rs_jerry_impl(std::string ip_addr,
                         std::make_unique<DpdkSettings>(port_id, norm));
 
     iqClient->SetStreamingStatus(true);
-    iqClient->SetupDpdkSource();
+    std::vector<DpdkSource::stream_attr> streams{ DpdkSource::stream_attr{
+        std::pair<int, int>(0, 24), port_id, static_cast<uint16_t>(port) } };
+    iqClient->SetupDpdkSource(streams.data(), streams.size());
 }
 
 void rs_jerry_impl::PrepareForGrpc(std::string ip_addr,
@@ -176,16 +179,14 @@ void rs_jerry_impl::SetDpdkSettings(std::unique_ptr<DpdkSettings> dpdk_settings)
 /*
  * Our virtual destructor.
  */
-rs_jerry_impl::~rs_jerry_impl() {
-  iqClient->SetStreamingStatus(false);
-}
+rs_jerry_impl::~rs_jerry_impl() { iqClient->SetStreamingStatus(false); }
 
 int rs_jerry_impl::work(int noutput_items,
                         gr_vector_const_void_star& input_items,
                         gr_vector_void_star& output_items)
 {
     gr_complex* out = (gr_complex*)output_items[0];
-    auto nsamples = iqClient->GetSamples(noutput_items, out);
+    auto nsamples = iqClient->GetSamples(0, noutput_items, out);
     // Do <+signal processing+>
 
     // Tell runtime system how many output items we produced.
