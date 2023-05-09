@@ -11,6 +11,10 @@
 ########################################################################
 include(GrPlatform) #define LIB_SUFFIX
 
+set(ADDITIONAL_FLAGS "-Wall -Wextra -Werror -Wno-unknown-pragmas")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${ADDITIONAL_FLAGS}")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${ADDITIONAL_FLAGS}")
+
 list(APPEND msr4_sources
     rs_jerry_impl.cc
 )
