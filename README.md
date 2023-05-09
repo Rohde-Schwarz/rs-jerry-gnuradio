@@ -29,7 +29,10 @@ Then, create a build directory and start the installation.
     sudo make install
 
 ## Usage
-- start gnuRadio as root (`sudo -E gnuradio-companion`)
+- start gnuRadio as root:
+
+      sudo -E LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH gnuradio-companion
+
 - navigate to the `MSR4` category in the sidebar
 - drag&drop the `rs jerry` block from the sidebar into the flowgraph
 - configure the `rs jerry` block. Generally, the tabs `General` and `Streaming Settings` are required to be modified
