@@ -182,7 +182,7 @@ void rs_jerry_impl::SetDpdkSettings(std::unique_ptr<DpdkSettings> dpdk_settings)
 rs_jerry_impl::~rs_jerry_impl() { iqClient->SetStreamingStatus(false); }
 
 int rs_jerry_impl::work(int noutput_items,
-                        gr_vector_const_void_star& input_items,
+                        gr_vector_const_void_star&,
                         gr_vector_void_star& output_items)
 {
     gr_complex* out = (gr_complex*)output_items[0];
